@@ -1,0 +1,20 @@
+---
+- name: "Jenkins slave user"
+  user:
+    name: "{{jenkins_slave_user}}"
+    home: "/var/lib/jenkins"
+    shell: "/bin/bash"
+
+- name: "Jenkins slave SSH dir"
+  become_user: "{{jenkins_slave_user}}"
+  file:
+    path: "~/.ssh"
+    state: "directory"
+
+- name: "Jenkins user key"
+  become_user: "{{jenkins_slave_user}}"
+  copy:
+    dest: "~/.ssh/authorized_keys"
+    content: "{{jenkins_slave_public_key}}"
+    mode: 0600
+  when: jenkins_slave_public_key is defined

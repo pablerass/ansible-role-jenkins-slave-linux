@@ -1,0 +1,26 @@
+---
+# tasks file for linux-slave
+- include: repos.yml
+
+- include: user.yml
+
+- name: "Jenkins needed packages"
+  package:
+    name={{item}}
+  with_items:
+    - openjdk-8-jre
+
+- name: "Build packages"
+  package:
+    name={{item}}
+  with_items:
+    - git
+    - google-chrome-stable
+    - nodejs
+    - python3-pip
+
+- name: "Python packages"
+  pip:
+    name={{item}}
+  with_items:
+    - awscli
