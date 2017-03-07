@@ -12,7 +12,7 @@ None.
 
 ## Dependencies
 
-None.
+* pablerass.xvfb
 
 ## Example Playbook
 
